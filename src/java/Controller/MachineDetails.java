@@ -21,7 +21,7 @@ public class MachineDetails implements Logic {
 
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        List<Machine> mList = DAOMachine.getMaquinas(req.getParameter("id"), DAOMachine.QueryType.byID);
+        List<Machine> mList = DAOMachine.getMachines(req.getParameter("id"), DAOMachine.QueryType.byID);
         req.setAttribute("machine", mList.get(0));
         req.setAttribute("machineComponents",mList.get(0).getComponents());
         req.setAttribute("machinePeripheral",mList.get(0).getPeripherals());

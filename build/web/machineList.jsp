@@ -168,6 +168,7 @@
                         <th>Setor</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                         </thead>
                         <c:forEach var="machine" items="${machines}" varStatus="id">
                             <tr>
@@ -175,6 +176,7 @@
                                 <td>${machine.ip}</td>
                                 <td>${machine.room}</td>
                                 <td>${machine.sector}</td>
+                                <td><a href="mvc?logic=GetMachine&id=${machine.id}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                                 <td><a href="#" onclick="deleteMachine(${machine.id}, '${machine.name}')"><span class="glyphicon glyphicon-trash"></span></a></td>
                                 <td><a href="mvc?logic=MachineDetails&id=${machine.id}">Detalhes</a></td>
                             </tr>

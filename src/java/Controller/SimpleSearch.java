@@ -19,7 +19,7 @@ public class SimpleSearch implements Logic{
 
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        List<Machine> machines = DAOMachine.getMaquinas(req.getParameter("query"), DAOMachine.QueryType.simpleSearch);
+        List<Machine> machines = DAOMachine.getMachines(req.getParameter("query"), DAOMachine.QueryType.simpleSearch);
         
         req.setAttribute("machines", machines);
         req.setAttribute("search", true);

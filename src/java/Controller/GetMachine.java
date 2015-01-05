@@ -15,16 +15,17 @@ import repository.DAOMachine;
  *
  * @author administrador-fae
  */
-public class ListMachine implements Logic{
+public class GetMachine implements Logic {
 
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        List<Machine> machines = DAOMachine.getMachines(null, DAOMachine.QueryType.all);
         
-        req.setAttribute("machines", machines);
-        req.setAttribute("search", false);
+        List<Machine> mList = DAOMachine.getMachines(req.getParameter("id"), DAOMachine.QueryType.byID);
+        req.setAttribute("machine", mList.get(0));
+        req.setAttribute("machineComponents",mList.get(0).getComponents());
+        req.setAttribute("machinePeripheral",mList.get(0).getPeripherals());
         
-        return "machineList.jsp";
+        return "editMachine.jsp";
         
     }
     

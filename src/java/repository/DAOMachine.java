@@ -21,18 +21,7 @@ public class DAOMachine extends DAO {
 
     public enum QueryType {
 
-        byName("SELECT * FROM machines_fae WHERE Name=?"),
-        byRoom("SELECT * FROM machines_fae WHERE Room=?"),
-        byOS("SELECT * FROM machines_components_fae AS c,machines_fae AS m WHERE c.MachineName=m.Name AND c.os=?"),
-        bySector("SELECT * FROM machines_fae WHERE sector=?"),
         byID("SELECT * FROM machines_fae WHERE ID=?"),
-        byRAM("SELECT * FROM machines_fae AS m, machines_components_fae AS c WHERE c.MachineName=m.Name AND c.RAM=?"),
-        byProcessor("SELECT * FROM machines_fae AS m, machines_components_fae AS c WHERE c.MachineName=m.Name AND c.Processor=?"),
-        byHD("SELECT * FROM machines_fae AS m, machines_components_fae AS c WHERE c.MachineName=m.Name AND c.HD=?"),
-        byVideoCard("SELECT * FROM machines_fae AS m, machines_components_fae AS c WHERE c.MachineName=m.Name AND c.VideoCard=?"),
-        byCheckedDate("SELECT * FROM machines_fae WHERE checkedDate=?"),
-        byIP("SELECT * FROM machines_fae WHERE IP=?"),
-        byOBS("SELECT * FROM machines_fae WHERE Observation=?"),
         simpleSearch("SELECT * FROM machines_fae WHERE name LIKE ? OR sector LIKE ? OR room LIKE ? OR ip LIKE ?"),
         all("SELECT * FROM machines_fae WHERE 1 ORDER BY sector,room,name");
 
@@ -97,7 +86,7 @@ public class DAOMachine extends DAO {
 
     }
 
-    public static ArrayList<Machine> getMaquinas(boolean[] searchFor, String[] searchTokens) throws SQLException {
+    public static ArrayList<Machine> getMachines(boolean[] searchFor, String[] searchTokens) throws SQLException {
 
         String query = "SELECT * FROM machines_fae INNER JOIN machines_components_fae ON name=machineName WHERE ";
 
@@ -145,7 +134,7 @@ public class DAOMachine extends DAO {
 
     }
 
-    public static ArrayList<Machine> getMaquinas(String search, QueryType qt) {
+    public static ArrayList<Machine> getMachines(String search, QueryType qt) {
 
         String query = qt.getQuery();
 

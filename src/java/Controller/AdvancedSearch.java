@@ -33,7 +33,7 @@ public class AdvancedSearch implements Logic {
         }
         searchTokens = req.getParameter("searchTokens").split(";");
 
-        List<Machine> machines = DAOMachine.getMaquinas(searchFor, searchTokens);
+        List<Machine> machines = DAOMachine.getMachines(searchFor, searchTokens);
 
         req.setAttribute("machines", machines);
 

@@ -30,23 +30,6 @@
         <link rel="stylesheet" type="text/css" href="lib/sweet-alert.css">
     </head>
     <body  style="padding: 50px 0">
-        <form style="visibility:hidden;display:none" id="form" action="editMachine.jsp" method="POST">
-            <input class="form-control" type="text" name="id" value="${machine.id}">
-            <input class="form-control" type="text" name="name" value="${machine.name}">
-            <input class="form-control" type="text" name="room" value="${machine.room}">
-            <input class="form-control" type="text" name="sector" value="${machine.sector}">
-            <input class="form-control" type="text" name="ip" value="${machine.ip}">
-            <input class="form-control" type="text" name="patrimony" value="${machine.patrimony}">
-            <input class="form-control" type="text" name="processor" value="${machineComponents.processor}">
-            <input class="form-control" type="text" name="ram" value="${machineComponents.ram}">
-            <input class="form-control" type="text" name="hd" value="${machineComponents.hd}">
-            <input class="form-control" type="text" name="videoCard" value="${machineComponents.videoCard}">
-            <input class="form-control" type="text" name="monitor" value="${machineComponents.monitor}">
-            <input class="form-control" type="text" name="patrimonyMonitor" value="${machineComponents.patrimonyMonitor}">
-            <input class="form-control" type="text" name="checkedDate" value="${machine.checkedDate}">
-            <input class="form-control" type="text" name="observation" value="${machine.observation}">
-            <input class="form-control" type="text" name="os" value="${machineComponents.os}">
-        </form>
         <nav class="navbar navbar-fixed-top navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -66,7 +49,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#" onclick="deleteMachine(${machine.id}, '${machine.name}')"><span class="glyphicon glyphicon-trash"></span> Apagar</a></li>
-                        <li><a href="#" onclick="document.getElementById('form').submit()"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
+                        <li><a href="mvc?logic=GetMachine&id=${machine.id}"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
                         <li><a href='mvc?logic=Logout'>Logout <span class="glyphicon glyphicon-off"></span></a></li>
                     </ul>
                 </div>
