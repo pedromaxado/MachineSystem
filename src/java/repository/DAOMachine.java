@@ -9,9 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import model.ChartData;
 import model.Machine;
-import model.Peripheral;
 
 /**
  *
@@ -259,6 +258,28 @@ public class DAOMachine extends DAO {
 
         return search;
 
+    }
+    
+    public static ArrayList<ChartData> getChartData() throws SQLException {
+        
+        ArrayList<ChartData> list = new ArrayList<>();
+        
+        String sql = "SELECT `sector`,COUNT(*) AS valor FROM `machines_fae` GROUP BY `sector`";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()) {
+            
+            ChartData cd = new ChartData();
+            
+            cd.setName(rs.getString("sector"));
+            cd.setValue(rs.getString("valor"));
+            
+            list.add(cd);
+        }
+        
+        return list;
     }
 
 }
