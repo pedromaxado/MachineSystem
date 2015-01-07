@@ -34,6 +34,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="mvc?logic=ListMachine"><span class="glyphicon glyphicon-list"></span>&nbsp;Lista de Máquinas</a></li>
                         <li><a href="newMachine.jsp"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Adicionar</a></li>
+                        <li><a href="mvc?logic=ChartLogic"><span class="glyphicon glyphicon-stats"></span>&nbsp;Estatisticas</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href='mvc?logic=Logout'>Logout <span class="glyphicon glyphicon-off"></span></a></li>
@@ -52,6 +53,7 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="newMachine.jsp">Adicionar nova Máquina</a></li>
                                 <li><a href="mvc?logic=ListMachine">Listar Máquinas</a><li>
+                                <li><a href="mvc?logic=ChartLogic">Estatísticas</a><li>
                             </ul>                            
                         </div>
                     </div>

@@ -71,13 +71,13 @@ public class DAOMachine extends DAO {
         stmt.setString(1, machineName);
 
         ResultSet rs = stmt.executeQuery();
-        
+
         int id = 0;
-        
+
         while (rs.next()) {
             id = rs.getInt("id");
         }
-        
+
         stmt.close();
         rs.close();
 
@@ -259,26 +259,46 @@ public class DAOMachine extends DAO {
         return search;
 
     }
-    
-    public static ArrayList<ChartData> getChartData() throws SQLException {
-        
+
+    public static ArrayList<ChartData> getChartData(int type) throws SQLException {
+
         ArrayList<ChartData> list = new ArrayList<>();
-        
-        String sql = "SELECT `sector`,COUNT(*) AS valor FROM `machines_fae` GROUP BY `sector`";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while(rs.next()) {
-            
-            ChartData cd = new ChartData();
-            
-            cd.setName(rs.getString("sector"));
-            cd.setValue(rs.getString("valor"));
-            
-            list.add(cd);
+
+        if (type == 0) {
+
+            String sql = "SELECT sector,COUNT(*) AS valor FROM machines_fae GROUP BY sector";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                ChartData cd = new ChartData();
+
+                cd.setName(rs.getString("sector"));
+                cd.setValue(rs.getString("valor"));
+
+                list.add(cd);
+            }
         }
-        
+        else if(type == 1){
+            String sql = "SELECT sector, Processor, COUNT(Processor) AS QTD FROM machines_components_fae "
+                    +    "INNER JOIN machines_fae ON machineid=id GROUP BY Processor ORDER BY sector,Processor";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                ChartData cd = new ChartData();
+
+                cd.setName(rs.getString("sector"));
+                cd.setValue(rs.getString("processor"));
+                cd.setOptionalValue(rs.getString("QTD"));
+
+                list.add(cd);
+            }
+        }
         return list;
     }
 

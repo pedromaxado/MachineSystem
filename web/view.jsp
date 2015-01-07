@@ -46,11 +46,12 @@
                         <li><a href="mvc?logic=ListMachine"><span class="glyphicon glyphicon-list"></span>&nbsp;Lista de Máquinas</a></li>
                         <li><a href="newMachine.jsp"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Adicionar</a></li>                        
                         <li class="active"><a href="#"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Detalhes</a></li>
+                        <li><a href="mvc?logic=ChartLogic"><span class="glyphicon glyphicon-stats"></span>&nbsp;Estatisticas</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#" onclick="deleteMachine(${machine.id}, '${machine.name}')"><span class="glyphicon glyphicon-trash"></span> Apagar</a></li>
                         <li><a href="mvc?logic=GetMachine&id=${machine.id}"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
-                        <li><a href='mvc?logic=Logout'>Logout <span class="glyphicon glyphicon-off"></span></a></li>
+                        <li><a href='mvc?logic=Logout'>Logout <span class="glyphicon glyphicon-off"></span></a></li>                        
                     </ul>
                 </div>
             </div>
