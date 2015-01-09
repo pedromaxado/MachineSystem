@@ -12,8 +12,7 @@ package model;
 public class ChartData {
     
     private String name;
-    private String value;
-    private String optionalValue;
+    private String value;    
    
     public String getName() {
         return name;
@@ -30,13 +29,4 @@ public class ChartData {
     public void setValue(String value) {
         this.value = value;
     }
-
-    public String getOptionalValue() {
-        return optionalValue;
-    }
-
-    public void setOptionalValue(String optionalValue) {
-        this.optionalValue = optionalValue;
-    }
-    
 }
