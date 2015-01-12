@@ -98,7 +98,7 @@
 
                         <!-- Dropdown-->
                         <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl1" id="currentSector" onclick="$('#gambiarra').toggle()">
+                            <a data-toggle="collapse" href="#dropdown-lvl1" id="currentSector" onclick="$('#changer').toggle()">
                                 Selecione o Setor <span class="caret"></span>
                             </a>
 
@@ -120,7 +120,7 @@
 
                     </ul>
                 </div>
-                <nav class="navbar-fixed-bottom">
+                <nav class="navbar-fixed-bottom" id="changer">
                     <ul class="pagination" id="chartOptions" style="margin-left: 15px">
                         <li class="active" id="pieChart"><a href="#">Gráfico de Setor</a></li>
                         <li id="columnChart"><a href="#">Gráfico de Colunas</a></li>                        
@@ -317,7 +317,7 @@
                 <c:forEach var="charData" items="${charDatas}" varStatus="id">
                     ['${charData.name}',${charData.value}],
                 </c:forEach>
-            ]
+            ];
 
             <c:forEach var="cdp" items="${charDatasProcessor}" varStatus="id">
                 var processorData_${cdp.sector} = [
