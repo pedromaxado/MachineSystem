@@ -93,13 +93,12 @@
 
                 </div>
 
-                <!-- Main Menu -->
                 <div class="side-menu-container">
                     <ul class="nav navbar-nav">
 
                         <!-- Dropdown-->
                         <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl1" id="currentSector">
+                            <a data-toggle="collapse" href="#dropdown-lvl1" id="currentSector" onclick="$('#gambiarra').toggle()">
                                 Selecione o Setor <span class="caret"></span>
                             </a>
 
@@ -115,14 +114,20 @@
                             </div>
                         </li>
                         <li id="machineChartActivator"><a href="#"><span class="glyphicon glyphicon-th-large"></span> Máquinas por Setor</a></li>
-                        <li id="processorChartActivator"><a href="#processor"><span class="glyphicon glyphicon-th"></span> Processador por Setor</a></li>
-                        <li id="ramChartActivator"><a href="#ram"><span class="glyphicon glyphicon-certificate"></span> RAM por Setor</a></li>
-                        <li id="hdChartActivator"><a href="#hd"><span class="glyphicon glyphicon-hdd"></span> HD por Setor</a></li>
+                        <li id="processorChartActivator" style="display: none;"><a href="#processor"><span class="glyphicon glyphicon-th"></span> Processador por Setor</a></li>
+                        <li id="ramChartActivator" style="display: none;"><a href="#ram"><span class="glyphicon glyphicon-certificate"></span> RAM por Setor</a></li>
+                        <li id="hdChartActivator" style="display: none;"><a href="#hd"><span class="glyphicon glyphicon-hdd"></span> HD por Setor</a></li>
 
                     </ul>
-                </div><!-- /.navbar-collapse -->
+                </div>
+                <nav class="navbar-fixed-bottom">
+                    <ul class="pagination" id="chartOptions" style="margin-left: 15px">
+                        <li class="active" id="pieChart"><a href="#">Gráfico de Setor</a></li>
+                        <li id="columnChart"><a href="#">Gráfico de Colunas</a></li>                        
+                    </ul>
+                </nav>
             </nav>
-
+            
         </div>
 
         <script src="js/highchart/highcharts.js"></script>
@@ -133,55 +138,101 @@
 
             <div class="side-body">
                 <div id="chartz"></div>
-                <ul class="pagination" id="chartOptions" style="display: none;">
-                    <li class="active" id="pieChart"><a href="#">Gráfico de Setor</a></li>
-                    <li id="columnChart"><a href="#">Gráfico de Colunas</a></li>                        
-                </ul>
             </div>
 
         </div>
 
         <script type="text/javascript">
             
+            var currentSector;
+            var currentComponent;
+            
             function changeCurrentSector(alfa) {
+                
                 $('#currentSector').text($(alfa).text()).append($("<span></span>").addClass("caret"));
+                
                 var sectorName = $(alfa).text();
+                currentSector = sectorName;
                 sectorName = sectorName.replace("-", "");
+                
                 var dataP = window['processorData_' + sectorName];
                 var dataR = window['ramData_' + sectorName];
                 var dataH = window['hdData_' + sectorName];
-                actualProcessorData = dataP;
-                actualRamData = dataR;
-                actualHdData = dataH;
-                if ($('#processorChartActivator').hasClass('active')) {
-                    $('#chartz').highcharts().series[0].setData(dataP);
-                    $('#chartz').highcharts().redraw();
-                } else if ($('#ramChartActivator').hasClass('active')) {
-                    $('#chartz').highcharts().series[0].setData(dataR);
-                    $('#chartz').highcharts().redraw();
-                } else if ($('#hdChartActivator').hasClass('active')) {
-                    $('#chartz').highcharts().series[0].setData(dataH);
-                    $('#chartz').highcharts().redraw();
-                }
+                
+                currentProcessorData = dataP;
+                currentRamData = dataR;
+                currentHdData = dataH;
+                
                 $('#currentSector').click();
+                
+                $('#processorChartActivator').show();
+                $('#ramChartActivator').show();
+                $('#hdChartActivator').show();
+                
             }
-            //-------------------------------------------------
-            //-------------Machines per Sector ----------------
-            $('#machineChartActivator').click(function () {
+            
+            $(document).ready(function () {
                 Highcharts.setOptions({
                     colors: ['#E85737', '#10B249', '#997969', '#9864FF', '#3D6699', '#FFFB51', '#FF675B', '#1CA6B2', '#9D51FF', '#FF762F', '#6EFFCE', '#CC006D', '#FFFC70']
                 });
+                $('#machineChartActivator').click();
+            });
+            
+            $('#pieChart').click(function() {
+                generatePieChart(currentSector,currentComponent,currentData);
+            });
+            
+            $('#columnChart').click(function () {
+                generateColumnChart(currentSector,currentComponent,currentData);
+            });
+
+            //------------------------------------------------
+            //-------------Machines per Sector----------------
+            $('#machineChartActivator').click(function () {
+                currentSector = 'FAE';
+                currentComponent = 'Máquinas';
+                currentData = machineData;
+                $('#pieChart').click();
+            });
+            
+            //------------------------------------------------
+            //--------------Processor By Sector---------------
+            $('#processorChartActivator').click(function () {
+                currentComponent = 'Processadores';
+                currentData = currentProcessorData;
+                $('#pieChart').click();
+            });
+            
+            //------------------------------------------
+            //---------------RAM By Sector--------------
+            $('#ramChartActivator').click(function () {
+                currentComponent = 'Memórias RAM';
+                currentData = currentRamData;
+                $('#pieChart').click();
+            });
+
+            //-------------------------------------------
+            //--------HD By Sector ---------------------
+            $('#hdChartActivator').click(function () {
+                currentComponent = 'HDs';
+                currentData = currentHdData;
+                $('#pieChart').click();
+            });
+            
+            
+            function generatePieChart(sector,component,dataArray) {
+                
                 $('#chartz').highcharts({
                     chart: {
                         type: 'pie',
                         options3d: {
                             enabled: true,
-                            alpha: 40,
+                            alpha: 45,
                             beta: 0
                         }
                     },
                     title: {
-                        text: 'Computadores por Setor'
+                        text: component + ' - ' + sector
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.y}</b>'
@@ -199,23 +250,18 @@
                     },
                     series: [{
                             type: 'pie',
-                            name: 'Quantidade de computadores',
-                            data: [
-        <c:forEach var="charData" items="${charDatas}" varStatus="id">
-                                ['${charData.name}',${charData.value}],
-        </c:forEach>
-                            ]
+                            name: 'Quantidade de ' + component,
+                            data: dataArray
                         }]
                 });
-                $(this).addClass('active');
+                
+                $("#pieChart").addClass('active');
                 $("#columnChart").removeClass('active');
                 
-                $("#chartOptions").toggle(500,"swing");
+            }
+            
+            function generateColumnChart(sector,component,dataArray) {
                 
-            });
-
-            $('#columnChart').click(function () {
-                // Set up the chart 
                 var chart = new Highcharts.Chart({
                     chart: {
                         renderTo: 'chartz',
@@ -230,7 +276,7 @@
                         }
                     },
                     title: {
-                        text: 'Computadores por Setor'
+                        text: component + ' - ' + sector
                     },
                     xAxis: {
                         type: 'category',
@@ -244,7 +290,7 @@
                     },
                     yAxis: {
                         title: {
-                            text: 'Quantidade de Computadores'
+                            text: 'Quantidade de ' + component
                         }
                     },
                     plotOptions: {
@@ -253,153 +299,48 @@
                         }
                     },
                     series: [{
-                            name: 'Computadores',
-                            data: [
-        <c:forEach var="charData" items="${charDatas}" varStatus="id">
-                                ['${charData.name}',${charData.value}],
-        </c:forEach>
-                            ]
+                            name: component,
+                            data: dataArray
                         }]
                 });
-                $(this).addClass('active');
+                $("#columnChart").addClass('active');
                 $("#pieChart").removeClass('active');
-            });
+                
+            }
+            
+            var currentData;
+            var currentProcessorData;
+            var currentRamData;
+            var currentHdData;
 
-            $(document).ready(function () {
-                $('#pieChart').click();
-            });
-            //-------------------------------------------------
-            //--------Processor By Sector ---------------------
-            $('#processorChartActivator').click(function () {
-                $('#chartz').highcharts({
-                    chart: {
-                        type: 'pie',
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    title: {
-                        text: 'Processadores por Setor'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.y}</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            depth: 35,
-                            dataLabels: {
-                                enabled: true,
-                                format: '{point.name}'
-                            }
-                        }
-                    },
-                    series: [{
-                            type: 'pie',
-                            name: 'Quantidade de Processadores',
-                            data: actualProcessorData
-                        }]
-                });
-            });
-
-            $('#ramChartActivator').click(function () {
-                $('#chartz').highcharts({
-                    chart: {
-                        type: 'pie',
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    title: {
-                        text: 'Mémorias por Setor'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.y}</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            depth: 35,
-                            dataLabels: {
-                                enabled: true,
-                                format: '{point.name}'
-                            }
-                        }
-                    },
-                    series: [{
-                            type: 'pie',
-                            name: 'Quantidade de Máquinas',
-                            data: actualRamData
-                        }]
-                });
-                $('#ramChart').highcharts().reflow();
-            });
-
-            $('#hdChartActivator').click(function () {
-                $('#chartz').highcharts({
-                    chart: {
-                        type: 'pie',
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    title: {
-                        text: 'HDs por Setor'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.y}</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            depth: 35,
-                            dataLabels: {
-                                enabled: true,
-                                format: '{point.name}'
-                            }
-                        }
-                    },
-                    series: [{
-                            type: 'pie',
-                            name: 'Quantidade de Máquinas',
-                            data: actualHdData
-                        }]
-                });
-            });
-
-            var actualProcessorData;
-            var actualRamData;
-            var actualHdData;
+            var machineData = [
+                <c:forEach var="charData" items="${charDatas}" varStatus="id">
+                    ['${charData.name}',${charData.value}],
+                </c:forEach>
+            ]
 
             <c:forEach var="cdp" items="${charDatasProcessor}" varStatus="id">
-                                                var processorData_${cdp.sector} = [
-                <c:forEach var="data" items="${cdp.datas}">
-                                                    ['${data.name}',${data.value}],
-                </c:forEach>
-                                                ];
+                var processorData_${cdp.sector} = [
+                    <c:forEach var="data" items="${cdp.datas}">
+                        ['${data.name}',${data.value}],
+                    </c:forEach>
+                ];
             </c:forEach>
+            
             <c:forEach var="cdp" items="${charDatasRam}" varStatus="id">
-                                                var ramData_${cdp.sector} = [
-                <c:forEach var="data" items="${cdp.datas}">
-                                                    ['${data.name}',${data.value}],
-                </c:forEach>
-                                                ];
+                var ramData_${cdp.sector} = [
+                    <c:forEach var="data" items="${cdp.datas}">
+                        ['${data.name}',${data.value}],
+                    </c:forEach>
+                ];
             </c:forEach>
+            
             <c:forEach var="cdp" items="${charDatasHd}" varStatus="id">
-                                                var hdData_${cdp.sector} = [
-                <c:forEach var="data" items="${cdp.datas}">
-                                                    ['${data.name}',${data.value}],
-                </c:forEach>
-                                                ];
+                var hdData_${cdp.sector} = [
+                    <c:forEach var="data" items="${cdp.datas}">
+                        ['${data.name}',${data.value}],
+                    </c:forEach>
+                ];
             </c:forEach>
 
         </script>
