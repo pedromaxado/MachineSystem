@@ -53,7 +53,6 @@
         </nav>
 
         <div class="side-menu">
-
             <nav class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
                     <div class="brand-wrapper">
@@ -64,19 +63,13 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-
                 </div>
-
                 <div class="side-menu-container">
                     <ul class="nav navbar-nav">
-
-                        <!-- Dropdown-->
                         <li class="panel panel-default" id="dropdown">
                             <a data-toggle="collapse" href="#dropdown-lvl1" id="currentSector" onclick="$('#gambiarra').toggle()">
                                 Selecione o Setor <span class="caret"></span>
                             </a>
-
-                            <!-- Dropdown level 1 -->
                             <div id="dropdown-lvl1" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
@@ -91,7 +84,6 @@
                         <li id="processorChartActivator" style="display: none;"><a href="#processor"><span class="glyphicon glyphicon-th"></span> Processador por Setor</a></li>
                         <li id="ramChartActivator" style="display: none;"><a href="#ram"><span class="glyphicon glyphicon-certificate"></span> RAM por Setor</a></li>
                         <li id="hdChartActivator" style="display: none;"><a href="#hd"><span class="glyphicon glyphicon-hdd"></span> HD por Setor</a></li>
-
                     </ul>
                 </div>
                 <nav class="navbar-fixed-bottom">
