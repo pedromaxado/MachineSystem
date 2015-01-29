@@ -67,7 +67,7 @@
                 <div class="side-menu-container">
                     <ul class="nav navbar-nav">
                         <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl1" id="currentSector" onclick="$('#gambiarra').toggle()">
+                            <a data-toggle="collapse" href="#dropdown-lvl1" id="currentSector" onclick="$('#changer').toggle()">
                                 Selecione o Setor <span class="caret"></span>
                             </a>
                             <div id="dropdown-lvl1" class="panel-collapse collapse">
@@ -86,7 +86,7 @@
                         <li id="hdChartActivator" style="display: none;"><a href="#hd"><span class="glyphicon glyphicon-hdd"></span> HD por Setor</a></li>
                     </ul>
                 </div>
-                <nav class="navbar-fixed-bottom">
+                <nav class="navbar-fixed-bottom" id="changer">
                     <ul class="pagination" id="chartOptions" style="margin-left: 15px">
                         <li class="active" id="pieChart"><a href="#">Gráfico de Setor</a></li>
                         <li id="columnChart"><a href="#">Gráfico de Colunas</a></li>                        
