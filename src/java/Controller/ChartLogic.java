@@ -38,6 +38,7 @@ public class ChartLogic implements Logic{
             cdsHd.setDatas(DAOChartData.getChartDataBySector(s,2));
             
             s = s.replace("-", "");
+            s = s.replace(" ", "");
             
             cdsProcessor.setSector(s);
             cdsRam.setSector(s);
