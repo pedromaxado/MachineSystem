@@ -109,7 +109,7 @@
         </div>
 
         <script type="text/javascript">
-            
+
             var currentSector;
             var currentComponent;
             
@@ -119,7 +119,8 @@
                 
                 var sectorName = $(alfa).text();
                 currentSector = sectorName;
-                sectorName = sectorName.replace("-", "");
+                sectorName = sectorName.replace(/-/g, "");
+                sectorName = sectorName.replace(/ /g, "");
                 
                 var dataP = window['processorData_' + sectorName];
                 var dataR = window['ramData_' + sectorName];
@@ -308,7 +309,7 @@
                     </c:forEach>
                 ];
             </c:forEach>
-
+            
         </script>
     </body>
 </html>
