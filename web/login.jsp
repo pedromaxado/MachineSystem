@@ -3,13 +3,6 @@
     Created on : 12/12/2014, 15:51:03
     Author     : administrador-fae
 --%>
-<%
-
-    if (session.getAttribute("username") != null) {
-        response.sendRedirect("index.jsp");
-    }
-
-%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,7 +40,7 @@
                             <h1 class="panel-title">Sistemas de Máquinas FAE - Login</h1>
                         </div>
                         <div class="panel-body">
-                            <form role="form" action="mvc" method="POST">
+                            <form role="form" action="Login" method="POST">
                                 <input type="hidden" name="logic" value="Login" />
                                 <div class="form-group">
                                     <!--<label for="User">Usuário</label>-->

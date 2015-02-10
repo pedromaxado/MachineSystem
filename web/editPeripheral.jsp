@@ -3,14 +3,6 @@
     Created on : 10/12/2014, 09:20:25
     Author     : administrador-fae
 --%>
-<%
-
-    if (session.getAttribute("username") == null) {
-        String loginPage = "login.jsp";
-        response.sendRedirect(loginPage);
-    }
-
-%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,9 +33,9 @@
                         <li><a href="mvc?logic=MachineDetails&id=${param.mId}"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Detalhes</a></li>
                         <li><a href="mvc?logic=ChartLogic"><span class="glyphicon glyphicon-stats"></span>&nbsp;Estatisticas</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href='mvc?logic=Logout'>Logout <span class="glyphicon glyphicon-off"></span></a></li>
-                    </ul>
+                    <form class="navbar-form navbar-right" action="Logout" method="POST">
+                        <button type="submit" class="btn btn-link">Logout <span class="glyphicon glyphicon-off"></span></button>
+                    </form>
                 </div>
             </div>
         </nav>

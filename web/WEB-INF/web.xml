@@ -12,4 +12,13 @@
         <exception-type>java.sql.SQLException</exception-type>
         <location>/error-page.jsp</location>
     </error-page>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>Filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/mvc</url-pattern>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
 </web-app>

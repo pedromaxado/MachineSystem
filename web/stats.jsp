@@ -4,15 +4,6 @@
     Author     : administrador-fae
 --%>
 
-<%
-
-    if (session.getAttribute("username") == null) {
-        String loginPage = "login.jsp";
-        response.sendRedirect(loginPage);
-    }
-
-%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,9 +36,9 @@
                         <li><a href="newMachine.jsp"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Adicionar</a></li>
                         <li class="active"><a href="mvc?logic=ChartLogic"><span class="glyphicon glyphicon-stats"></span>&nbsp;Estatisticas</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href='mvc?logic=Logout'>Logout <span class="glyphicon glyphicon-off"></span></a></li>
-                    </ul>
+                    <form class="navbar-form navbar-right" action="Logout" method="POST">
+                        <button type="submit" class="btn btn-link">Logout <span class="glyphicon glyphicon-off"></span></button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -140,7 +131,7 @@
             
             $(document).ready(function () {
                 Highcharts.setOptions({
-                    colors: ['#E85737', '#10B249', '#997969', '#9864FF', '#3D6699', '#FFFB51', '#FF675B', '#1CA6B2', '#9D51FF', '#FF762F', '#6EFFCE', '#CC006D', '#FFFC70']
+                    colors: ['#E85737', '#1CA6B2', '#FFFB51', '#9864FF', '#3D6699', '#997969', '#FF675B', '#10B249', '#9D51FF', '#FF762F', '#6EFFCE', '#FFFC70', '#CC006D']
                 });
                 $('#machineChartActivator').click();
             });

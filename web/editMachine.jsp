@@ -3,14 +3,6 @@
     Created on : 10/12/2014, 09:40:38
     Author     : administrador-fae
 --%>
-<%
-
-    if (session.getAttribute("username") == null) {
-        String loginPage = "login.jsp";
-        response.sendRedirect(loginPage);
-    }
-
-%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,9 +35,11 @@
                         <li><a href="mvc?logic=MachineDetails&id=${machine.id}"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Detalhes</a></li>
                         <li><a href="mvc?logic=ChartLogic"><span class="glyphicon glyphicon-stats"></span>&nbsp;Estatisticas</a></li>
                     </ul>
+                    <form class="navbar-form navbar-right" action="Logout" method="POST">
+                        <button type="submit" class="btn btn-link">Logout <span class="glyphicon glyphicon-off"></span></button>
+                    </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="#"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Editar</a></li>
-                        <li><a href='mvc?logic=Logout'>Logout <span class="glyphicon glyphicon-off"></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -78,12 +72,12 @@
             </div>
         </div>
         <script>
-            function save(){
-                swal({   title: "Edição concluída!", type: "success"},
-                function(){
+            function save() {
+                swal({title: "Edição concluída!", type: "success"},
+                function () {
                     document.getElementById('form').submit();
                 });
-                
+
             }
         </script>
     </body>
