@@ -18,7 +18,7 @@ public class ConnectionFactory {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             //FAE
-            return DriverManager.getConnection("jdbc:mysql://150.164.117.21/fae_machines_db","admin","admin");
+            return DriverManager.getConnection("jdbc:mysql://localhost/fae_machines_db","admin","admin");
             //Coltec            
             //return DriverManager.getConnection("jdbc:mysql://150.164.102.160/daw-aluno8","daw-aluno8","daw08");
             //Home
